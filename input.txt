@@ -1,0 +1,6 @@
+Jessica, 13, No
+Robert , 25, Yes
+James, 90, No
+Maggie, 80, Yes
+Joe, 3, No
+Randy, 13, No

@@ -1,0 +1,477 @@
+Sat Apr  6 15:37:14 PDT 2024
+Linux csslab8 4.18.0-513.18.1.el8_9.x86_64 #1 SMP Wed Feb 21 21:34:36 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+uid=1157988(mary2003) gid=2121157988(mary2003) groups=2121157988(mary2003),605559(lab-access)
+=====================================================
+1. Compiles without warnings with -Wall -Wextra flags
+=====================================================
+=====================================================
+2. Runs and produces correct output
+=====================================================
+1: Maggie
+2: Robert 
+3: James
+4: Jessica
+
+END.
+
+=====================================================
+3. clang-tidy warnings are fixed
+=====================================================
+23408 warnings generated.
+75202 warnings generated.
+119783 warnings generated.
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.cpp:6:15: error: declaration must be declared within the '__llvm_libc' namespace [llvmlibc-implementation-in-namespace,-warnings-as-errors]
+std::ostream &operator<<(std::ostream &os, const CovidPatient &patient) {
+              ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.cpp:6:40: error: parameter name 'os' is too short, expected at least 3 characters [readability-identifier-length,-warnings-as-errors]
+std::ostream &operator<<(std::ostream &os, const CovidPatient &patient) {
+                                       ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.cpp:7:6: error: 'operator<<<char, std::char_traits<char>, std::allocator<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+  os << patient.name;
+     ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/basic_string.h:4020:5: note: resolves to this declaration
+    operator<<(basic_ostream<_CharT, _Traits>& __os,
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:15:1: error: system include string not allowed, transitively included from /home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h [llvmlibc-restrict-system-libc-headers,-warnings-as-errors]
+#include <string>
+^~~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:20:16: error: pass by value and use std::move [modernize-pass-by-value,-warnings-as-errors]
+  CovidPatient(std::string name, int age, int hadCondition)
+               ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:20:34: error: 2 adjacent parameters of 'CovidPatient' of similar type ('int') are easily swapped by mistake [bugprone-easily-swappable-parameters,-warnings-as-errors]
+  CovidPatient(std::string name, int age, int hadCondition)
+                                 ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:20:38: note: the first parameter in the range is 'age'
+  CovidPatient(std::string name, int age, int hadCondition)
+                                     ^~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:20:47: note: the last parameter in the range is 'hadCondition'
+  CovidPatient(std::string name, int age, int hadCondition)
+                                              ^~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:21:14: error: parameter 'name' is passed by value and only copied once; consider moving it to avoid unnecessary copies [performance-unnecessary-value-param,-warnings-as-errors]
+      : name(name), age(age), precondition_illnesses(hadCondition) {}
+             ^
+             std::move( )
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:23:21: error: member 'name' of type 'const std::string' (aka 'const basic_string<char>') is const qualified [cppcoreguidelines-avoid-const-or-ref-data-members,-warnings-as-errors]
+  const std::string name;
+                    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:23:21: error: member variable 'name' has public visibility [misc-non-private-member-variables-in-classes,-warnings-as-errors]
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:23:21: error: invalid case style for public member 'name' [readability-identifier-naming,-warnings-as-errors]
+  const std::string name;
+                    ^~~~
+                    Name
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:24:13: error: member 'age' of type 'const int' is const qualified [cppcoreguidelines-avoid-const-or-ref-data-members,-warnings-as-errors]
+  const int age;
+            ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:24:13: error: member variable 'age' has public visibility [misc-non-private-member-variables-in-classes,-warnings-as-errors]
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:24:13: error: invalid case style for public member 'age' [readability-identifier-naming,-warnings-as-errors]
+  const int age;
+            ^~~
+            Age
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:25:13: error: member 'precondition_illnesses' of type 'const int' is const qualified [cppcoreguidelines-avoid-const-or-ref-data-members,-warnings-as-errors]
+  const int precondition_illnesses; // 0 for none, 1 for yes.
+            ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:25:13: error: member variable 'precondition_illnesses' has public visibility [misc-non-private-member-variables-in-classes,-warnings-as-errors]
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:25:13: error: invalid case style for public member 'precondition_illnesses' [readability-identifier-naming,-warnings-as-errors]
+note: this fix will not be applied because it overlaps with another fix
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:29:49: error: parameter name 'os' is too short, expected at least 3 characters [readability-identifier-length,-warnings-as-errors]
+  friend std::ostream &operator<<(std::ostream &os,
+                                                ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:49:7: error: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return,-warnings-as-errors]
+    } else if (rhs->precondition_illnesses < lhs->precondition_illnesses) {
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:19:1: error: system include algorithm not allowed [llvmlibc-restrict-system-libc-headers,-warnings-as-errors]
+#include <algorithm> // For remove_if function (to remove whitespace)
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:20:1: error: system include iostream not allowed [llvmlibc-restrict-system-libc-headers,-warnings-as-errors]
+#include <iostream>
+^~~~~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:21:1: error: system include sstream not allowed [llvmlibc-restrict-system-libc-headers,-warnings-as-errors]
+#include <sstream>
+^~~~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:22:1: error: system include stack not allowed [llvmlibc-restrict-system-libc-headers,-warnings-as-errors]
+#include <stack>
+^~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:24:1: error: constructor does not initialize these fields: availableVaccines [cppcoreguidelines-pro-type-member-init,hicpp-member-init,-warnings-as-errors]
+COVIDPriorityQueue::COVIDPriorityQueue() {}
+^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:24:21: error: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default,-warnings-as-errors]
+COVIDPriorityQueue::COVIDPriorityQueue() {}
+                    ^                    ~~
+                                         = default;
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:24:21: error: declaration must be declared within the '__llvm_libc' namespace [llvmlibc-implementation-in-namespace,-warnings-as-errors]
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:26:21: error: declaration must be declared within the '__llvm_libc' namespace [llvmlibc-implementation-in-namespace,-warnings-as-errors]
+COVIDPriorityQueue::~COVIDPriorityQueue() {
+                    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:27:3: error: kernel performance could be improved by unrolling this loop with a '#pragma unroll' directive [altera-unroll-loops,-warnings-as-errors]
+  while (!vaccineQueue.empty()) {
+  ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:36:26: error: declaration must be declared within the '__llvm_libc' namespace [llvmlibc-implementation-in-namespace,-warnings-as-errors]
+void COVIDPriorityQueue::displayAvailable() {
+                         ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.h:56:3: note: inferred assignment of ID-dependent member from ID-dependent  [altera-id-dependent-backward-branch]
+  int availableVaccines; // Number of available vaccines.
+  ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:37:30: error: invalid case style for variable 'patientStack' [readability-identifier-naming,-warnings-as-errors]
+  std::stack<CovidPatient *> patientStack;
+                             ^~~~~~~~~~~~
+                             PatientStack
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:39:7: error: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length,-warnings-as-errors]
+  int i = 0;
+      ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:39:7: error: invalid case style for variable 'i' [readability-identifier-naming,-warnings-as-errors]
+  int i = 0;
+      ^
+      I
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:40:3: error: kernel performance could be improved by unrolling this loop with a '#pragma unroll' directive [altera-unroll-loops,-warnings-as-errors]
+  while (i < availableVaccines && !vaccineQueue.empty()) {
+  ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:40:10: error: backward branch (while loop) is ID-dependent due to member reference to 'availableVaccines' and may cause performance degradation [altera-id-dependent-backward-branch,-warnings-as-errors]
+  while (i < availableVaccines && !vaccineQueue.empty()) {
+         ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:43:15: error: 'operator<<' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+    std::cout << i << ": " << *(vaccineQueue.top()) << std::endl;
+              ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/ostream:191:7: note: resolves to this declaration
+      operator<<(int __n);
+      ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:43:20: error: 'operator<<<std::char_traits<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+    std::cout << i << ": " << *(vaccineQueue.top()) << std::endl;
+                   ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/ostream:662:5: note: resolves to this declaration
+    operator<<(basic_ostream<char, _Traits>& __out, const char* __s)
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:43:28: error: 'operator<<' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+    std::cout << i << ": " << *(vaccineQueue.top()) << std::endl;
+                           ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:29:24: note: resolves to this declaration
+  friend std::ostream &operator<<(std::ostream &os,
+                       ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:43:53: error: 'operator<<' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+    std::cout << i << ": " << *(vaccineQueue.top()) << std::endl;
+                                                    ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/ostream:110:7: note: resolves to this declaration
+      operator<<(__ostream_type& (*__pf)(__ostream_type&))
+      ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:43:56: error: 'endl<char, std::char_traits<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+    std::cout << i << ": " << *(vaccineQueue.top()) << std::endl;
+                                                       ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/ostream:735:5: note: resolves to this declaration
+    endl(basic_ostream<_CharT, _Traits>& __os)
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:49:3: error: kernel performance could be improved by unrolling this loop with a '#pragma unroll' directive [altera-unroll-loops,-warnings-as-errors]
+  while (!patientStack.empty()) {
+  ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:67:26: error: declaration must be declared within the '__llvm_libc' namespace [llvmlibc-implementation-in-namespace,-warnings-as-errors]
+bool COVIDPriorityQueue::initFromFile(std::string filename) {
+                         ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:67:51: error: the parameter 'filename' is copied for each invocation but only used as a const reference; consider making it a const reference [performance-unnecessary-value-param,-warnings-as-errors]
+bool COVIDPriorityQueue::initFromFile(std::string filename) {
+                                                  ^
+                                      const      &
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:68:16: error: invalid case style for variable 'file' [readability-identifier-naming,-warnings-as-errors]
+  std::fstream file;
+               ^~~~
+               File
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:74:5: error: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return,-warnings-as-errors]
+  } else {
+    ^~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:91:26: error: declaration must be declared within the '__llvm_libc' namespace [llvmlibc-implementation-in-namespace,-warnings-as-errors]
+bool COVIDPriorityQueue::initFromFile(std::fstream &infile) {
+                         ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:92:15: error: invalid case style for variable 'currLine' [readability-identifier-naming,-warnings-as-errors]
+  std::string currLine;
+              ^~~~~~~~
+              CurrLine
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:93:3: error: kernel performance could be improved by unrolling this loop with a '#pragma unroll' directive [altera-unroll-loops,-warnings-as-errors]
+  while (std::getline(infile, currLine)) {
+  ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:93:10: error: Potential leak of memory pointed to by 'patient' [clang-analyzer-cplusplus.NewDeleteLeaks,-warnings-as-errors]
+  while (std::getline(infile, currLine)) {
+         ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:71:7: note: Assuming the condition is true
+  if (file.is_open()) {
+      ^~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:71:3: note: Taking true branch
+  if (file.is_open()) {
+  ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:72:12: note: Calling 'COVIDPriorityQueue::initFromFile'
+    return initFromFile(file);
+           ^~~~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:93:3: note: Loop condition is true.  Entering loop body
+  while (std::getline(infile, currLine)) {
+  ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:95:29: note: Calling 'COVIDPriorityQueue::strToPatient'
+    CovidPatient *patient = strToPatient(currLine);
+                            ^~~~~~~~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:118:7: note: Left side of '&&' is true
+  if (std::getline(iss, name, ',') && std::getline(iss, ageStr, ',') &&
+      ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:118:7: note: Left side of '&&' is true
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:118:3: note: Taking true branch
+  if (std::getline(iss, name, ',') && std::getline(iss, ageStr, ',') &&
+  ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:127:5: note: Taking true branch
+    if (hasPreconditionIllness == "yes") {
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:136:29: note: Memory is allocated
+    CovidPatient *patient = new CovidPatient(name, age, hasPrecondition);
+                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:95:29: note: Returned allocated memory
+    CovidPatient *patient = strToPatient(currLine);
+                            ^~~~~~~~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:97:9: note: Left side of '&&' is true
+    if (patient != nullptr && isEligibleForVaccine(patient)) {
+        ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:97:5: note: Taking false branch
+    if (patient != nullptr && isEligibleForVaccine(patient)) {
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:93:10: note: Potential leak of memory pointed to by 'patient'
+  while (std::getline(infile, currLine)) {
+         ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:93:10: error: 'getline<char, std::char_traits<char>, std::allocator<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+  while (std::getline(infile, currLine)) {
+         ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/basic_string.h:4060:5: note: resolves to this declaration
+    getline(basic_istream<_CharT, _Traits>& __is,
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:95:19: error: invalid case style for variable 'patient' [readability-identifier-naming,-warnings-as-errors]
+    CovidPatient *patient = strToPatient(currLine);
+                  ^~~~~~~
+                  Patient
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:102:11: error: the 'empty' method should be used to check for emptiness instead of 'size' [readability-container-size-empty,-warnings-as-errors]
+  return (vaccineQueue.size() > 0);
+          ^~~~~~~~~~~~~~~~~~~~~~~
+          !vaccineQueue.empty()
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_queue.h:708:7: note: method 'priority_queue'::empty() defined here
+      empty() const
+      ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:111:35: error: declaration must be declared within the '__llvm_libc' namespace [llvmlibc-implementation-in-namespace,-warnings-as-errors]
+CovidPatient *COVIDPriorityQueue::strToPatient(std::string patientInfo) {
+                                  ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:111:60: error: the parameter 'patientInfo' is copied for each invocation but only used as a const reference; consider making it a const reference [performance-unnecessary-value-param,-warnings-as-errors]
+CovidPatient *COVIDPriorityQueue::strToPatient(std::string patientInfo) {
+                                                           ^
+                                               const      &
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:112:15: error: invalid case style for variable 'name' [readability-identifier-naming,-warnings-as-errors]
+  std::string name;
+              ^~~~
+              Name
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:113:15: error: invalid case style for variable 'ageStr' [readability-identifier-naming,-warnings-as-errors]
+  std::string ageStr;
+              ^~~~~~
+              AgeStr
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:114:15: error: invalid case style for variable 'hasPreconditionIllness' [readability-identifier-naming,-warnings-as-errors]
+  std::string hasPreconditionIllness;
+              ^~~~~~~~~~~~~~~~~~~~~~
+              HasPreconditionIllness
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:116:22: error: invalid case style for variable 'iss' [readability-identifier-naming,-warnings-as-errors]
+  std::istringstream iss(patientInfo);
+                     ^~~
+                     Iss
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:118:7: error: 'getline<char, std::char_traits<char>, std::allocator<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+  if (std::getline(iss, name, ',') && std::getline(iss, ageStr, ',') &&
+      ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/basic_string.h:4082:5: note: resolves to this declaration
+    getline(basic_istream<char>& __in, basic_string<char>& __str,
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:118:39: error: 'getline<char, std::char_traits<char>, std::allocator<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+  if (std::getline(iss, name, ',') && std::getline(iss, ageStr, ',') &&
+                                      ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/basic_string.h:4082:5: note: resolves to this declaration
+    getline(basic_istream<char>& __in, basic_string<char>& __str,
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:119:7: error: 'getline<char, std::char_traits<char>, std::allocator<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+      std::getline(iss, hasPreconditionIllness)) {
+      ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/basic_string.h:4060:5: note: resolves to this declaration
+    getline(basic_istream<_CharT, _Traits>& __is,
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:121:5: error: variable 'age' of type 'int' can be declared 'const' [misc-const-correctness,-warnings-as-errors]
+    int age = std::stoi(ageStr);
+    ^
+        const 
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:121:9: error: invalid case style for variable 'age' [readability-identifier-naming,-warnings-as-errors]
+    int age = std::stoi(ageStr);
+        ^~~
+        Age
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:121:15: error: 'stoi' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+    int age = std::stoi(ageStr);
+              ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/basic_string.h:4108:3: note: resolves to this declaration
+  stoi(const string& __str, size_t* __idx = 0, int __base = 10)
+  ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:122:10: error: invalid case style for variable 'hasPrecondition' [readability-identifier-naming,-warnings-as-errors]
+    bool hasPrecondition = false;
+         ^~~~~~~~~~~~~~~
+         HasPrecondition
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:127:32: error: 'operator==<char, std::char_traits<char>, std::allocator<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+    if (hasPreconditionIllness == "yes") {
+                               ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/basic_string.h:3715:5: note: resolves to this declaration
+    operator==(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:130:39: error: 'operator!=<char, std::char_traits<char>, std::allocator<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+    } else if (hasPreconditionIllness != "no") {
+                                      ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/basic_string.h:3803:5: note: resolves to this declaration
+    operator!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:132:17: error: 'operator<<<std::char_traits<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+      std::cout << "Invalid condition: " << hasPreconditionIllness << std::endl;
+                ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/ostream:662:5: note: resolves to this declaration
+    operator<<(basic_ostream<char, _Traits>& __out, const char* __s)
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:132:42: error: 'operator<<<char, std::char_traits<char>, std::allocator<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+      std::cout << "Invalid condition: " << hasPreconditionIllness << std::endl;
+                                         ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/basic_string.h:4020:5: note: resolves to this declaration
+    operator<<(basic_ostream<_CharT, _Traits>& __os,
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:132:68: error: 'operator<<' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+      std::cout << "Invalid condition: " << hasPreconditionIllness << std::endl;
+                                                                   ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/ostream:110:7: note: resolves to this declaration
+      operator<<(__ostream_type& (*__pf)(__ostream_type&))
+      ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:132:71: error: 'endl<char, std::char_traits<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+      std::cout << "Invalid condition: " << hasPreconditionIllness << std::endl;
+                                                                      ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/ostream:735:5: note: resolves to this declaration
+    endl(basic_ostream<_CharT, _Traits>& __os)
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:136:5: error: use auto when initializing with new to avoid duplicating the type name [hicpp-use-auto,modernize-use-auto,-warnings-as-errors]
+    CovidPatient *patient = new CovidPatient(name, age, hasPrecondition);
+    ^~~~~~~~~~~~
+    auto
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:136:19: error: invalid case style for variable 'patient' [readability-identifier-naming,-warnings-as-errors]
+    CovidPatient *patient = new CovidPatient(name, age, hasPrecondition);
+                  ^~~~~~~
+                  Patient
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:136:57: error: implicit conversion bool -> 'int' [readability-implicit-bool-conversion,-warnings-as-errors]
+    CovidPatient *patient = new CovidPatient(name, age, hasPrecondition);
+                                                        ^
+                                                        static_cast<int>( )
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:149:26: error: declaration must be declared within the '__llvm_libc' namespace [llvmlibc-implementation-in-namespace,-warnings-as-errors]
+bool COVIDPriorityQueue::isEligibleForVaccine(CovidPatient *patient) {
+                         ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:149:26: error: method 'isEligibleForVaccine' can be made static [readability-convert-member-functions-to-static,-warnings-as-errors]
+bool COVIDPriorityQueue::isEligibleForVaccine(CovidPatient *patient) {
+                         ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:150:27: error: 5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers,-warnings-as-errors]
+  return (patient->age >= 5);
+                          ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:162:26: error: declaration must be declared within the '__llvm_libc' namespace [llvmlibc-implementation-in-namespace,-warnings-as-errors]
+void COVIDPriorityQueue::normalizeStr(std::string &str) {
+                         ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:162:26: error: method 'normalizeStr' can be made static [readability-convert-member-functions-to-static,-warnings-as-errors]
+void COVIDPriorityQueue::normalizeStr(std::string &str) {
+                         ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:163:8: error: invalid case style for variable 'newEnd' [readability-identifier-naming,-warnings-as-errors]
+  auto newEnd = remove_if(str.begin(), str.end(), isspace);
+       ^~~~~~
+       NewEnd
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:163:17: error: 'remove_if<__gnu_cxx::__normal_iterator<char *, std::basic_string<char>>, int (*)(int)>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+  auto newEnd = remove_if(str.begin(), str.end(), isspace);
+                ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_algo.h:870:5: note: resolves to this declaration
+    remove_if(_ForwardIterator __first, _ForwardIterator __last,
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:166:3: error: 'transform<__gnu_cxx::__normal_iterator<char *, std::basic_string<char>>, __gnu_cxx::__normal_iterator<char *, std::basic_string<char>>, int (*)(int)>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+  transform(str.begin(), str.end(), str.begin(), ::tolower);
+  ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_algo.h:4298:5: note: resolves to this declaration
+    transform(_InputIterator __first, _InputIterator __last,
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.h:20:1: error: system include fstream not allowed, transitively included from /home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.h [llvmlibc-restrict-system-libc-headers,-warnings-as-errors]
+#include <fstream> // For reading files
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.h:21:1: error: system include queue not allowed, transitively included from /home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.h [llvmlibc-restrict-system-libc-headers,-warnings-as-errors]
+#include <queue>
+^~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/main.cpp:3:1: error: system include iostream not allowed [llvmlibc-restrict-system-libc-headers,-warnings-as-errors]
+#include <iostream>
+^~~~~~~~~~~~~~~~~~~
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/main.cpp:5:5: error: declaration must be declared within the '__llvm_libc' namespace [llvmlibc-implementation-in-namespace,-warnings-as-errors]
+int main() {
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/main.cpp:6:22: error: invalid case style for variable 'cpQueue' [readability-identifier-naming,-warnings-as-errors]
+  COVIDPriorityQueue cpQueue;
+                     ^~~~~~~
+                     CpQueue
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/main.cpp:12:13: error: 'operator<<<std::char_traits<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+  std::cout << "\nEND.\n" << std::endl;
+            ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/ostream:662:5: note: resolves to this declaration
+    operator<<(basic_ostream<char, _Traits>& __out, const char* __s)
+    ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/main.cpp:12:27: error: 'operator<<' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+  std::cout << "\nEND.\n" << std::endl;
+                          ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/ostream:110:7: note: resolves to this declaration
+      operator<<(__ostream_type& (*__pf)(__ostream_type&))
+      ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/main.cpp:12:30: error: 'endl<char, std::char_traits<char>>' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+  std::cout << "\nEND.\n" << std::endl;
+                             ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/ostream:735:5: note: resolves to this declaration
+    endl(basic_ostream<_CharT, _Traits>& __os)
+    ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/predefined_ops.h:158:23: error: 'operator()' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+        { return bool(_M_comp(*__it1, *__it2)); }
+                      ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:45:8: note: resolves to this declaration
+  bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
+       ^
+/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/predefined_ops.h:196:16: error: 'operator()' must resolve to a function declared within the '__llvm_libc' namespace [llvmlibc-callee-namespace,-warnings-as-errors]
+        { return bool(_M_comp(*__it, __val)); }
+                      ^
+/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:45:8: note: resolves to this declaration
+  bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
+       ^
+Suppressed 119653 warnings (119653 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+90 warnings treated as errors
+=====================================================
+4. clang-format does not find any formatting issues
+=====================================================
+Running clang-format on ./CovidPatient.cpp
+Running clang-format on ./CovidPriorityQueue.cpp
+Running clang-format on ./main.cpp
+=====================================================
+5. No memory leaks using g++
+=====================================================
+=====================================================
+6. No memory leaks using valgrind, look for "definitely lost" 
+=====================================================
+==842736== Memcheck, a memory error detector
+==842736== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==842736== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==842736== Command: ./a.out
+==842736== Parent PID: 842639
+==842736== 
+==842736== 
+==842736== HEAP SUMMARY:
+==842736==     in use at exit: 240 bytes in 6 blocks
+==842736==   total heap usage: 19 allocs, 13 frees, 86,481 bytes allocated
+==842736== 
+==842736== LEAK SUMMARY:
+==842736==    definitely lost: 240 bytes in 6 blocks
+==842736==    indirectly lost: 0 bytes in 0 blocks
+==842736==      possibly lost: 0 bytes in 0 blocks
+==842736==    still reachable: 0 bytes in 0 blocks
+==842736==         suppressed: 0 bytes in 0 blocks
+==842736== Rerun with --leak-check=full to see details of leaked memory
+==842736== 
+==842736== For lists of detected and suppressed errors, rerun with: -s
+==842736== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+=====================================================
+7. Tests have full code coverage
+=====================================================
+./create-output.sh: line 129: ./check-code-coverage.sh: Permission denied
+Sat Apr  6 15:37:36 PDT 2024
+=====================================================
+To create an output.txt file with all the output from this script
+Run the below command
+      ./create-output.sh > output.txt 2>&1 
+=====================================================

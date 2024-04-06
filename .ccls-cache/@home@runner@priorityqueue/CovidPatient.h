@@ -26,7 +26,7 @@ public:
   // Int (instead of bool) for comparison reasons.
 
   // Overloaded operators
-  friend std::ostream &operator<<(std::ostream &os,
+  friend std::ostream &operator<<(std::ostream &outStream,
                                   const CovidPatient &patient); // Name only
 };
 

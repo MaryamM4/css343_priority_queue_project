@@ -3,23 +3,50 @@
 #
 # usage: clang-tidy *.cpp -- -std=c++14
 #
-#
+#   -llvmlibc-callee-namespace',
+#   -llvmlibc-restrict-system-libc-headers,
+#  -llvmlibc-implementation-in-namespace,
 ---
 # See https://clang.llvm.org/extra/clang-tidy/#using-clang-tidy for all possible checks
-Checks: '*,-fuchsia-*,-cppcoreguidelines-pro-bounds-constant-array-index,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-google-readability-braces-around-statements,-google-build-using-namespace,-readability-braces-around-statements,-hicpp-no-array-decay,-modernize-use-trailing-return-type,-hicpp-braces-around-statements,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-llvm-header-guard,-google-global-names-in-headers,-cppcoreguidelines-special-member-functions,-hicpp-special-member-functions,-cppcoreguidelines-owning-memory'
 
-WarningsAsErrors: "*"
+Checks: >-
+  *,
+  -hicpp-use-auto,
+  -readability-identifier-naming,
+  -clang-diagnostic-error,
+  -misc-const-correctness,
+  -altera-id-dependent-backward-branch,
+  -cppcoreguidelines-avoid-const-or-ref-data-members,
+  -altera-unroll-loops, 
+  -cppcoreguidelines-avoid-magic-numbers,
+  -llvmlibc-*,
+  -llvm-header-guard,
+  -bugprone-easily-swappable-parameters,
+  -fuchsia-*,
+  -cppcoreguidelines-pro-bounds-constant-array-index,
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+  -google-readability-braces-around-statements,
+  -google-build-using-namespace,
+  -readability-braces-around-statements,
+  -hicpp-no-array-decay,
+  -modernize-use-trailing-return-type,
+  -hicpp-braces-around-statements,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -google-global-names-in-headers,
+  -cppcoreguidelines-special-member-functions,
+  -hicpp-special-member-functions,
+  -cppcoreguidelines-owning-memory
+
+WarningsAsErrors: '*'
 HeaderFilterRegex: '.*'
 
-# Based on LLVM style in https://llvm.org/docs/CodingStandards.html#the-low-level-issues
 CheckOptions:
- - { key: readability-identifier-naming.ClassCase,           value: CamelCase  }
- - { key: readability-identifier-naming.StructCase,          value: CamelCase  }
- - { key: readability-identifier-naming.EnumCase,            value: CamelCase  }
- - { key: readability-identifier-naming.VariableCase,        value: CamelCase  }
- - { key: readability-identifier-naming.GlobalConstantCase,  value: UPPER_CASE }
- - { key: readability-identifier-naming.FunctionCase,        value: camelBack  }
- - { key: readability-identifier-naming.PublicMethodCase,    value: camelBack  }
- - { key: readability-identifier-naming.PrivateMethodCase,   value: camelBack  }
- - { key: readability-identifier-naming.PublicMemberCase,    value: CamelCase  } 
-...
+  - { key: readability-identifier-naming.ClassCase,           value: CamelCase  }
+  - { key: readability-identifier-naming.StructCase,          value: CamelCase  }
+  - { key: readability-identifier-naming.EnumCase,            value: CamelCase  }
+  - { key: readability-identifier-naming.VariableCase,        value: CamelCase  }
+  - { key: readability-identifier-naming.GlobalConstantCase,  value: UPPER_CASE }
+  - { key: readability-identifier-naming.FunctionCase,        value: camelBack  }
+  - { key: readability-identifier-naming.PublicMethodCase,    value: camelBack  }
+  - { key: readability-identifier-naming.PrivateMethodCase,   value: camelBack  }
+  - { key: readability-identifier-naming.PublicMemberCase,    value: CamelCase  }

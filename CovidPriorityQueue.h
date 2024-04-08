@@ -14,15 +14,19 @@
  * Implemented by Maryam M, 2024
  */
 
-#pragma once
+
+#ifndef COVID_PRIORITY_QUEUE_H
+#define COVID_PRIORITY_QUEUE_H
 
 #include "CovidPatient.h"
 #include <fstream> // For reading files
+#include <memory> // For unique_ptr & make_unique
 #include <queue>
 
 class COVIDPriorityQueue {
 public:
-  COVIDPriorityQueue();
+  COVIDPriorityQueue() : availableVaccines(0) {}
+  explicit COVIDPriorityQueue(int numVaccines) : availableVaccines(numVaccines) {}
   ~COVIDPriorityQueue();
 
   bool empty() const;
@@ -30,11 +34,11 @@ public:
   void pop();
   template <typename ItemType> ItemType &top();
 
-  bool initFromFile(std::string filename);
+  bool initFromFile(const std::string &filename);
   bool initFromFile(std::fstream &infile);
 
   // Returns False if under 5.
-  bool isEligibleForVaccine(CovidPatient *patient);
+  bool isEligibleForVaccine(const std::unique_ptr<CovidPatient>& patient) const;
 
   void displayAvailable(); // RENAME
 
@@ -49,17 +53,19 @@ public:
   int getAvailableVaccines() const { return availableVaccines; }
 
 private:
-  std::priority_queue<CovidPatient *, std::vector<CovidPatient *>,
-                      ComparePatient>
-      vaccineQueue;
+  const int MinEligibleAge = 5;
+
+  std::priority_queue<std::unique_ptr<CovidPatient>, std::vector<std::unique_ptr<CovidPatient>>, ComparePatient> vaccineQueue{ComparePatient()};
 
   int availableVaccines; // Number of available vaccines.
 
   // ==[HELPER METHODS]==
   // Returns patient based on single string. String format should be:
   // Name (string), Age (int), Precondition Illnesses (string: Yes/No)
-  CovidPatient *strToPatient(std::string patientInfo);
+  static CovidPatient *strToPatient(const std::string &patientInfo);
 
   // Helper function: Removes whitespaces and converts string to lowercase
-  void normalizeStr(std::string &str);
+  static void normalizeStr(std::string &str);
 };
+
+#endif // COVID_PRIORITY_QUEUE_H

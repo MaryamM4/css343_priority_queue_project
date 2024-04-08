@@ -3,7 +3,7 @@
 #include <iostream>
 
 int main() {
-  COVIDPriorityQueue cpQueue;
+  COVIDPriorityQueue cpQueue = COVIDPriorityQueue();
 
   cpQueue.initFromFile("input.txt");
   cpQueue.setAvailableVaccines(4);

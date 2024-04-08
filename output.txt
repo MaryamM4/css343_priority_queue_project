@@ -1,573 +1,141 @@
-Sun Apr  7 22:47:11 PDT 2024
+Sun Apr  7 23:42:05 PDT 2024
 Linux csslab8 4.18.0-513.18.1.el8_9.x86_64 #1 SMP Wed Feb 21 21:34:36 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
 uid=1157988(mary2003) gid=2121157988(mary2003) groups=2121157988(mary2003),605559(lab-access)
 =====================================================
 1. Compiles without warnings with -Wall -Wextra flags
 =====================================================
-CovidPriorityQueue.cpp: In member function ‘bool COVIDPriorityQueue::initFromFile(std::fstream&)’:
-CovidPriorityQueue.cpp:92:50: error: ‘make_unique’ is not a member of ‘std’
-     std::unique_ptr<CovidPatient> Patient = std::make_unique<CovidPatient>(strToPatient(CurrLine));
-                                                  ^~~~~~~~~~~
-CovidPriorityQueue.cpp:92:50: note: ‘std::make_unique’ is only available from C++14 onwards
-CovidPriorityQueue.cpp:92:74: error: expected primary-expression before ‘>’ token
-     std::unique_ptr<CovidPatient> Patient = std::make_unique<CovidPatient>(strToPatient(CurrLine));
-                                                                          ^
-In file included from /usr/include/c++/8/x86_64-redhat-linux/bits/c++allocator.h:33,
-                 from /usr/include/c++/8/bits/allocator.h:46,
-                 from /usr/include/c++/8/string:41,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-/usr/include/c++/8/ext/new_allocator.h: In instantiation of ‘void __gnu_cxx::new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = std::unique_ptr<CovidPatient>; _Args = {const std::unique_ptr<CovidPatient, std::default_delete<CovidPatient> >&}; _Tp = std::unique_ptr<CovidPatient>]’:
-/usr/include/c++/8/bits/alloc_traits.h:475:4:   required from ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(std::allocator_traits<std::allocator<_CharT> >::allocator_type&, _Up*, _Args&& ...) [with _Up = std::unique_ptr<CovidPatient>; _Args = {const std::unique_ptr<CovidPatient, std::default_delete<CovidPatient> >&}; _Tp = std::unique_ptr<CovidPatient>; std::allocator_traits<std::allocator<_CharT> >::allocator_type = std::allocator<std::unique_ptr<CovidPatient> >]’
-/usr/include/c++/8/bits/stl_deque.h:1557:30:   required from ‘void std::deque<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = std::unique_ptr<CovidPatient>; _Alloc = std::allocator<std::unique_ptr<CovidPatient> >; std::deque<_Tp, _Alloc>::value_type = std::unique_ptr<CovidPatient>]’
-/usr/include/c++/8/bits/stl_stack.h:226:9:   required from ‘void std::stack<_Tp, _Sequence>::push(const value_type&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::deque<std::unique_ptr<CovidPatient>, std::allocator<std::unique_ptr<CovidPatient> > >; std::stack<_Tp, _Sequence>::value_type = std::unique_ptr<CovidPatient>]’
-CovidPriorityQueue.cpp:40:41:   required from here
-/usr/include/c++/8/ext/new_allocator.h:136:4: error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>::unique_ptr(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = CovidPatient; _Dp = std::default_delete<CovidPatient>]’
-  { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
-    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from /usr/include/c++/8/memory:80,
-                 from CovidPriorityQueue.h:23,
-                 from CovidPriorityQueue.cpp:17:
-/usr/include/c++/8/bits/unique_ptr.h:397:7: note: declared here
-       unique_ptr(const unique_ptr&) = delete;
-       ^~~~~~~~~~
-In file included from /usr/include/c++/8/bits/stl_algobase.h:71,
-                 from /usr/include/c++/8/bits/char_traits.h:39,
-                 from /usr/include/c++/8/string:40,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-/usr/include/c++/8/bits/predefined_ops.h: In instantiation of ‘bool __gnu_cxx::__ops::_Iter_comp_val<_Compare>::operator()(_Iterator, _Value&) [with _Iterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Value = std::unique_ptr<CovidPatient>; _Compare = ComparePatient]’:
-/usr/include/c++/8/bits/stl_heap.h:133:48:   required from ‘void std::__push_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_val<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:207:23:   required from ‘void std::push_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’
-/usr/include/c++/8/bits/stl_queue.h:614:16:   required from ‘void std::priority_queue<_Tp, _Sequence, _Compare>::push(const value_type&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::vector<std::unique_ptr<CovidPatient> >; _Compare = ComparePatient; std::priority_queue<_Tp, _Sequence, _Compare>::value_type = std::unique_ptr<CovidPatient>]’
-CovidPriorityQueue.cpp:48:41:   required from here
-/usr/include/c++/8/bits/predefined_ops.h:177:11: error: no match for call to ‘(ComparePatient) (std::unique_ptr<CovidPatient>&, std::unique_ptr<CovidPatient>&)’
-  { return bool(_M_comp(*__it, __val)); }
-           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-CovidPatient.h:55:8: note: candidate: ‘bool ComparePatient::operator()(const CovidPatient*, const CovidPatient*) const’
-   bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-        ^~~~~~~~
-CovidPatient.h:55:8: note:   no known conversion for argument 1 from ‘std::unique_ptr<CovidPatient>’ to ‘const CovidPatient*’
-In file included from /usr/include/c++/8/bits/stl_algobase.h:71,
-                 from /usr/include/c++/8/bits/char_traits.h:39,
-                 from /usr/include/c++/8/string:40,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-/usr/include/c++/8/bits/predefined_ops.h: In instantiation of ‘bool __gnu_cxx::__ops::_Iter_comp_iter<_Compare>::operator()(_Iterator1, _Iterator2) [with _Iterator1 = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Iterator2 = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’:
-/usr/include/c++/8/bits/stl_heap.h:222:14:   required from ‘void std::__adjust_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:342:22:   required from ‘void std::__make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:397:23:   required from ‘void std::make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’
-/usr/include/c++/8/bits/stl_queue.h:496:23:   required from ‘std::priority_queue<_Tp, _Sequence, _Compare>::priority_queue(const _Compare&, _Sequence&&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::vector<std::unique_ptr<CovidPatient> >; _Compare = ComparePatient]’
-CovidPriorityQueue.h:58:143:   required from here
-/usr/include/c++/8/bits/predefined_ops.h:143:18: error: no match for call to ‘(ComparePatient) (std::unique_ptr<CovidPatient>&, std::unique_ptr<CovidPatient>&)’
-         { return bool(_M_comp(*__it1, *__it2)); }
-                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-CovidPatient.h:55:8: note: candidate: ‘bool ComparePatient::operator()(const CovidPatient*, const CovidPatient*) const’
-   bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-        ^~~~~~~~
-CovidPatient.h:55:8: note:   no known conversion for argument 1 from ‘std::unique_ptr<CovidPatient>’ to ‘const CovidPatient*’
-In file included from /usr/include/c++/8/bits/stl_algobase.h:71,
-                 from /usr/include/c++/8/bits/char_traits.h:39,
-                 from /usr/include/c++/8/string:40,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from main.cpp:1:
-/usr/include/c++/8/bits/predefined_ops.h: In instantiation of ‘bool __gnu_cxx::__ops::_Iter_comp_iter<_Compare>::operator()(_Iterator1, _Iterator2) [with _Iterator1 = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Iterator2 = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’:
-/usr/include/c++/8/bits/stl_heap.h:222:14:   required from ‘void std::__adjust_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:342:22:   required from ‘void std::__make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:397:23:   required from ‘void std::make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’
-/usr/include/c++/8/bits/stl_queue.h:496:23:   required from ‘std::priority_queue<_Tp, _Sequence, _Compare>::priority_queue(const _Compare&, _Sequence&&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::vector<std::unique_ptr<CovidPatient> >; _Compare = ComparePatient]’
-CovidPriorityQueue.h:58:143:   required from here
-/usr/include/c++/8/bits/predefined_ops.h:143:18: error: no match for call to ‘(ComparePatient) (std::unique_ptr<CovidPatient>&, std::unique_ptr<CovidPatient>&)’
-         { return bool(_M_comp(*__it1, *__it2)); }
-                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from CovidPriorityQueue.h:21,
-                 from main.cpp:1:
-CovidPatient.h:55:8: note: candidate: ‘bool ComparePatient::operator()(const CovidPatient*, const CovidPatient*) const’
-   bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-        ^~~~~~~~
-CovidPatient.h:55:8: note:   no known conversion for argument 1 from ‘std::unique_ptr<CovidPatient>’ to ‘const CovidPatient*’
-In file included from /usr/include/c++/8/memory:64,
-                 from CovidPriorityQueue.h:23,
-                 from main.cpp:1:
-/usr/include/c++/8/bits/stl_construct.h: In instantiation of ‘void std::_Construct(_T1*, _Args&& ...) [with _T1 = std::unique_ptr<CovidPatient>; _Args = {const std::unique_ptr<CovidPatient, std::default_delete<CovidPatient> >&}]’:
-/usr/include/c++/8/bits/stl_uninitialized.h:83:18:   required from ‘static _ForwardIterator std::__uninitialized_copy<_TrivialValueTypes>::__uninit_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _ForwardIterator = std::unique_ptr<CovidPatient>*; bool _TrivialValueTypes = false]’
-/usr/include/c++/8/bits/stl_uninitialized.h:134:15:   required from ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _ForwardIterator = std::unique_ptr<CovidPatient>*]’
-/usr/include/c++/8/bits/stl_uninitialized.h:289:37:   required from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>&) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _ForwardIterator = std::unique_ptr<CovidPatient>*; _Tp = std::unique_ptr<CovidPatient>]’
-/usr/include/c++/8/bits/stl_vector.h:463:31:   required from ‘std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = std::unique_ptr<CovidPatient>; _Alloc = std::allocator<std::unique_ptr<CovidPatient> >]’
-/usr/include/c++/8/bits/stl_queue.h:435:11:   required from here
-/usr/include/c++/8/bits/stl_construct.h:75:7: error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>::unique_ptr(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = CovidPatient; _Dp = std::default_delete<CovidPatient>]’
-     { ::new(static_cast<void*>(__p)) _T1(std::forward<_Args>(__args)...); }
-       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from /usr/include/c++/8/memory:80,
-                 from CovidPriorityQueue.h:23,
-                 from main.cpp:1:
-/usr/include/c++/8/bits/unique_ptr.h:397:7: note: declared here
-       unique_ptr(const unique_ptr&) = delete;
-       ^~~~~~~~~~
-In file included from /usr/include/c++/8/bits/stl_algobase.h:71,
-                 from /usr/include/c++/8/bits/char_traits.h:39,
-                 from /usr/include/c++/8/string:40,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from main.cpp:1:
-/usr/include/c++/8/bits/predefined_ops.h: In instantiation of ‘bool __gnu_cxx::__ops::_Iter_comp_val<_Compare>::operator()(_Iterator, _Value&) [with _Iterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Value = std::unique_ptr<CovidPatient>; _Compare = ComparePatient]’:
-/usr/include/c++/8/bits/stl_heap.h:133:48:   required from ‘void std::__push_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_val<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:237:23:   required from ‘void std::__adjust_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:342:22:   required from ‘void std::__make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:397:23:   required from ‘void std::make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’
-/usr/include/c++/8/bits/stl_queue.h:496:23:   required from ‘std::priority_queue<_Tp, _Sequence, _Compare>::priority_queue(const _Compare&, _Sequence&&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::vector<std::unique_ptr<CovidPatient> >; _Compare = ComparePatient]’
-CovidPriorityQueue.h:58:143:   required from here
-/usr/include/c++/8/bits/predefined_ops.h:177:11: error: no match for call to ‘(ComparePatient) (std::unique_ptr<CovidPatient>&, std::unique_ptr<CovidPatient>&)’
-  { return bool(_M_comp(*__it, __val)); }
-           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from CovidPriorityQueue.h:21,
-                 from main.cpp:1:
-CovidPatient.h:55:8: note: candidate: ‘bool ComparePatient::operator()(const CovidPatient*, const CovidPatient*) const’
-   bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-        ^~~~~~~~
-CovidPatient.h:55:8: note:   no known conversion for argument 1 from ‘std::unique_ptr<CovidPatient>’ to ‘const CovidPatient*’
 =====================================================
 2. Runs and produces correct output
 =====================================================
-./create-output.sh: line 69: ./a.out: No such file or directory
+1: Maggie
+2: Robert 
+3: James
+4: Jessica
+
+END.
+
 =====================================================
 3. clang-tidy warnings are fixed
 =====================================================
-32130 warnings generated.
-89268 warnings and 5 errors generated.
-Error while processing /home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp.
-139914 warnings and 9 errors generated.
-Error while processing /home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/main.cpp.
-/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:92:50: error: no member named 'make_unique' in namespace 'std' [clang-diagnostic-error]
-    std::unique_ptr<CovidPatient> Patient = std::make_unique<CovidPatient>(strToPatient(CurrLine));
-                                            ~~~~~^
-/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:92:62: error: 'CovidPatient' does not refer to a value [clang-diagnostic-error]
-    std::unique_ptr<CovidPatient> Patient = std::make_unique<CovidPatient>(strToPatient(CurrLine));
-                                                             ^
-/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:19:7: note: declared here
-class CovidPatient {
-      ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/new_allocator.h:187:23: error: call to deleted constructor of 'std::unique_ptr<CovidPatient>' [clang-diagnostic-error]
-        { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
-                             ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/alloc_traits.h:537:8: note: in instantiation of function template specialization 'std::__new_allocator<std::unique_ptr<CovidPatient>>::construct<std::unique_ptr<CovidPatient>, const std::unique_ptr<CovidPatient> &>' requested here
-          __a.construct(__p, std::forward<_Args>(__args)...);
-              ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_deque.h:1543:21: note: in instantiation of function template specialization 'std::allocator_traits<std::allocator<std::unique_ptr<CovidPatient>>>::construct<std::unique_ptr<CovidPatient>, const std::unique_ptr<CovidPatient> &>' requested here
-            _Alloc_traits::construct(this->_M_impl,
-                           ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_stack.h:261:11: note: in instantiation of member function 'std::deque<std::unique_ptr<CovidPatient>>::push_back' requested here
-      { c.push_back(__x); }
-          ^
-/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp:40:18: note: in instantiation of member function 'std::stack<std::unique_ptr<CovidPatient>>::push' requested here
-    PatientStack.push(vaccineQueue.top());
-                 ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/unique_ptr.h:522:7: note: 'unique_ptr' has been explicitly marked deleted here
-      unique_ptr(const unique_ptr&) = delete;
-      ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/predefined_ops.h:158:23: error: no matching function for call to object of type 'ComparePatient' [clang-diagnostic-error]
-        { return bool(_M_comp(*__it1, *__it2)); }
-                      ^~~~~~~
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_heap.h:232:8: note: in instantiation of function template specialization '__gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>::operator()<__gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>>' requested here
-          if (__comp(__first + __secondChild,
-              ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_heap.h:356:9: note: in instantiation of function template specialization 'std::__adjust_heap<__gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, long, std::unique_ptr<CovidPatient>, __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>>' requested here
-          std::__adjust_heap(__first, __parent, __len, _GLIBCXX_MOVE(__value),
-               ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_heap.h:413:12: note: in instantiation of function template specialization 'std::__make_heap<__gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>>' requested here
-      std::__make_heap(__first, __last, __cmp);
-           ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_queue.h:567:14: note: in instantiation of function template specialization 'std::make_heap<__gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, ComparePatient>' requested here
-      { std::make_heap(c.begin(), c.end(), comp); }
-             ^
-/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.h:58:126: note: in instantiation of member function 'std::priority_queue<std::unique_ptr<CovidPatient>, std::vector<std::unique_ptr<CovidPatient>>, ComparePatient>::priority_queue' requested here
-  std::priority_queue<std::unique_ptr<CovidPatient>, std::vector<std::unique_ptr<CovidPatient>>, ComparePatient> vaccineQueue{ComparePatient()};
-                                                                                                                             ^
-/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:55:8: note: candidate function not viable: no known conversion from 'std::unique_ptr<CovidPatient>' to 'const CovidPatient *' for 1st argument
-  bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-       ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/predefined_ops.h:196:16: error: no matching function for call to object of type 'ComparePatient' [clang-diagnostic-error]
-        { return bool(_M_comp(*__it, __val)); }
-                      ^~~~~~~
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_heap.h:140:42: note: in instantiation of function template specialization '__gnu_cxx::__ops::_Iter_comp_val<ComparePatient>::operator()<__gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, std::unique_ptr<CovidPatient>>' requested here
-      while (__holeIndex > __topIndex && __comp(__first + __parent, __value))
-                                         ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_heap.h:247:12: note: in instantiation of function template specialization 'std::__push_heap<__gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, long, std::unique_ptr<CovidPatient>, __gnu_cxx::__ops::_Iter_comp_val<ComparePatient>>' requested here
-      std::__push_heap(__first, __holeIndex, __topIndex,
-           ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_heap.h:356:9: note: in instantiation of function template specialization 'std::__adjust_heap<__gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, long, std::unique_ptr<CovidPatient>, __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>>' requested here
-          std::__adjust_heap(__first, __parent, __len, _GLIBCXX_MOVE(__value),
-               ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_heap.h:413:12: note: in instantiation of function template specialization 'std::__make_heap<__gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>>' requested here
-      std::__make_heap(__first, __last, __cmp);
-           ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_queue.h:567:14: note: in instantiation of function template specialization 'std::make_heap<__gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, ComparePatient>' requested here
-      { std::make_heap(c.begin(), c.end(), comp); }
-             ^
-/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.h:58:126: note: in instantiation of member function 'std::priority_queue<std::unique_ptr<CovidPatient>, std::vector<std::unique_ptr<CovidPatient>>, ComparePatient>::priority_queue' requested here
-  std::priority_queue<std::unique_ptr<CovidPatient>, std::vector<std::unique_ptr<CovidPatient>>, ComparePatient> vaccineQueue{ComparePatient()};
-                                                                                                                             ^
-/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.h:55:8: note: candidate function not viable: no known conversion from 'std::unique_ptr<CovidPatient>' to 'const CovidPatient *' for 1st argument
-  bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-       ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_construct.h:119:25: error: call to deleted constructor of 'std::unique_ptr<CovidPatient>' [clang-diagnostic-error]
-      ::new((void*)__p) _Tp(std::forward<_Args>(__args)...);
-                        ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_uninitialized.h:120:11: note: in instantiation of function template specialization 'std::_Construct<std::unique_ptr<CovidPatient>, const std::unique_ptr<CovidPatient> &>' requested here
-            std::_Construct(std::__addressof(*__cur), *__first);
-                 ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_uninitialized.h:137:16: note: in instantiation of function template specialization 'std::__do_uninit_copy<__gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, std::unique_ptr<CovidPatient> *>' requested here
-        { return std::__do_uninit_copy(__first, __last, __result); }
-                      ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_uninitialized.h:185:2: note: in instantiation of function template specialization 'std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, std::unique_ptr<CovidPatient> *>' requested here
-        __uninit_copy(__first, __last, __result);
-        ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_uninitialized.h:373:19: note: in instantiation of function template specialization 'std::uninitialized_copy<__gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, std::unique_ptr<CovidPatient> *>' requested here
-      return std::uninitialized_copy(__first, __last, __result);
-                  ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_vector.h:603:9: note: in instantiation of function template specialization 'std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, std::unique_ptr<CovidPatient> *, std::unique_ptr<CovidPatient>>' requested here
-          std::__uninitialized_copy_a(__x.begin(), __x.end(),
-               ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_queue.h:498:11: note: in instantiation of member function 'std::vector<std::unique_ptr<CovidPatient>>::vector' requested here
-    class priority_queue
-          ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/unique_ptr.h:522:7: note: 'unique_ptr' has been explicitly marked deleted here
-      unique_ptr(const unique_ptr&) = delete;
-      ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_uninitialized.h:90:7: error: static assertion failed due to requirement 'is_constructible<std::unique_ptr<CovidPatient, std::default_delete<CovidPatient>>, const std::unique_ptr<CovidPatient, std::default_delete<CovidPatient>> &>::value': result type must be constructible from input type [clang-diagnostic-error]
-      static_assert(is_constructible<_ValueType, _Tp>::value,
-      ^             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_uninitialized.h:182:4: note: in instantiation of function template specialization 'std::__check_constructible<std::unique_ptr<CovidPatient>, const std::unique_ptr<CovidPatient> &>' requested here
-        = _GLIBCXX_USE_ASSIGN_FOR_INIT(_ValueType2, _From);
-          ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_uninitialized.h:101:13: note: expanded from macro '_GLIBCXX_USE_ASSIGN_FOR_INIT'
-    && std::__check_constructible<T, U>()
-            ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_uninitialized.h:373:19: note: in instantiation of function template specialization 'std::uninitialized_copy<__gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, std::unique_ptr<CovidPatient> *>' requested here
-      return std::uninitialized_copy(__first, __last, __result);
-                  ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_vector.h:603:9: note: in instantiation of function template specialization 'std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient> *, std::vector<std::unique_ptr<CovidPatient>>>, std::unique_ptr<CovidPatient> *, std::unique_ptr<CovidPatient>>' requested here
-          std::__uninitialized_copy_a(__x.begin(), __x.end(),
-               ^
-/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_queue.h:498:11: note: in instantiation of member function 'std::vector<std::unique_ptr<CovidPatient>>::vector' requested here
-    class priority_queue
-          ^
-Suppressed 139914 warnings (139914 in non-user code).
+32114 warnings generated.
+81750 warnings generated.
+124746 warnings generated.
+Suppressed 124746 warnings (124746 in non-user code).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
-Found compiler error(s).
 =====================================================
 4. clang-format does not find any formatting issues
 =====================================================
 Running clang-format on ./CovidPatient.cpp
 Running clang-format on ./CovidPriorityQueue.cpp
-70c70
-<   } 
----
->   }
-72c72
-<   // Failed to open file. 
----
->   // Failed to open file.
-91,93c91,93
+28,29c28,29
 <     
-<     std::unique_ptr<CovidPatient> Patient = std::make_unique<CovidPatient>(strToPatient(CurrLine));
+<     delete(Patient);
+---
+> 
+>     delete (Patient);
+31c31
 <     
 ---
 > 
->     std::unique_ptr<CovidPatient> Patient =
->         std::make_unique<CovidPatient>(strToPatient(CurrLine));
-135,136c135,136
-<     //CovidPatient *Patient = new CovidPatient(Name, Age, HasPrecondition);
-<     //return Patient;
+35c35
+<   //std::cout << "Delete CovidPriorityQ" << std::endl;
 ---
->     // CovidPatient *Patient = new CovidPatient(Name, Age, HasPrecondition);
->     // return Patient;
-148c148,149
-< bool COVIDPriorityQueue::isEligibleForVaccine(const std::unique_ptr<CovidPatient>& patient) const {
+>   // std::cout << "Delete CovidPriorityQ" << std::endl;
+78c78
+<   } 
+---
+>   }
+80c80
+<   // Failed to open file. 
+---
+>   // Failed to open file.
+101c101
+<     
+---
+> 
+154c154,155
+< bool COVIDPriorityQueue::isEligibleForVaccine(const CovidPatient *patient) const {
 ---
 > bool COVIDPriorityQueue::isEligibleForVaccine(
->     const std::unique_ptr<CovidPatient> &patient) const {
+>     const CovidPatient *patient) const {
 Running clang-format on ./main.cpp
 =====================================================
 5. No memory leaks using g++
 =====================================================
-CovidPriorityQueue.cpp: In member function ‘bool COVIDPriorityQueue::initFromFile(std::fstream&)’:
-CovidPriorityQueue.cpp:92:50: error: ‘make_unique’ is not a member of ‘std’
-     std::unique_ptr<CovidPatient> Patient = std::make_unique<CovidPatient>(strToPatient(CurrLine));
-                                                  ^~~~~~~~~~~
-CovidPriorityQueue.cpp:92:50: note: ‘std::make_unique’ is only available from C++14 onwards
-CovidPriorityQueue.cpp:92:74: error: expected primary-expression before ‘>’ token
-     std::unique_ptr<CovidPatient> Patient = std::make_unique<CovidPatient>(strToPatient(CurrLine));
-                                                                          ^
-In file included from /usr/include/c++/8/x86_64-redhat-linux/bits/c++allocator.h:33,
-                 from /usr/include/c++/8/bits/allocator.h:46,
-                 from /usr/include/c++/8/string:41,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-/usr/include/c++/8/ext/new_allocator.h: In instantiation of ‘void __gnu_cxx::new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = std::unique_ptr<CovidPatient>; _Args = {const std::unique_ptr<CovidPatient, std::default_delete<CovidPatient> >&}; _Tp = std::unique_ptr<CovidPatient>]’:
-/usr/include/c++/8/bits/alloc_traits.h:475:4:   required from ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(std::allocator_traits<std::allocator<_CharT> >::allocator_type&, _Up*, _Args&& ...) [with _Up = std::unique_ptr<CovidPatient>; _Args = {const std::unique_ptr<CovidPatient, std::default_delete<CovidPatient> >&}; _Tp = std::unique_ptr<CovidPatient>; std::allocator_traits<std::allocator<_CharT> >::allocator_type = std::allocator<std::unique_ptr<CovidPatient> >]’
-/usr/include/c++/8/bits/stl_deque.h:1557:30:   required from ‘void std::deque<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = std::unique_ptr<CovidPatient>; _Alloc = std::allocator<std::unique_ptr<CovidPatient> >; std::deque<_Tp, _Alloc>::value_type = std::unique_ptr<CovidPatient>]’
-/usr/include/c++/8/bits/stl_stack.h:226:9:   required from ‘void std::stack<_Tp, _Sequence>::push(const value_type&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::deque<std::unique_ptr<CovidPatient>, std::allocator<std::unique_ptr<CovidPatient> > >; std::stack<_Tp, _Sequence>::value_type = std::unique_ptr<CovidPatient>]’
-CovidPriorityQueue.cpp:40:41:   required from here
-/usr/include/c++/8/ext/new_allocator.h:136:4: error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>::unique_ptr(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = CovidPatient; _Dp = std::default_delete<CovidPatient>]’
-  { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
-    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from /usr/include/c++/8/memory:80,
-                 from CovidPriorityQueue.h:23,
-                 from CovidPriorityQueue.cpp:17:
-/usr/include/c++/8/bits/unique_ptr.h:397:7: note: declared here
-       unique_ptr(const unique_ptr&) = delete;
-       ^~~~~~~~~~
-In file included from /usr/include/c++/8/bits/stl_algobase.h:71,
-                 from /usr/include/c++/8/bits/char_traits.h:39,
-                 from /usr/include/c++/8/string:40,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-/usr/include/c++/8/bits/predefined_ops.h: In instantiation of ‘bool __gnu_cxx::__ops::_Iter_comp_val<_Compare>::operator()(_Iterator, _Value&) [with _Iterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Value = std::unique_ptr<CovidPatient>; _Compare = ComparePatient]’:
-/usr/include/c++/8/bits/stl_heap.h:133:48:   required from ‘void std::__push_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_val<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:207:23:   required from ‘void std::push_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’
-/usr/include/c++/8/bits/stl_queue.h:614:16:   required from ‘void std::priority_queue<_Tp, _Sequence, _Compare>::push(const value_type&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::vector<std::unique_ptr<CovidPatient> >; _Compare = ComparePatient; std::priority_queue<_Tp, _Sequence, _Compare>::value_type = std::unique_ptr<CovidPatient>]’
-CovidPriorityQueue.cpp:48:41:   required from here
-/usr/include/c++/8/bits/predefined_ops.h:177:11: error: no match for call to ‘(ComparePatient) (std::unique_ptr<CovidPatient>&, std::unique_ptr<CovidPatient>&)’
-  { return bool(_M_comp(*__it, __val)); }
-           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-CovidPatient.h:55:8: note: candidate: ‘bool ComparePatient::operator()(const CovidPatient*, const CovidPatient*) const’
-   bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-        ^~~~~~~~
-CovidPatient.h:55:8: note:   no known conversion for argument 1 from ‘std::unique_ptr<CovidPatient>’ to ‘const CovidPatient*’
-In file included from /usr/include/c++/8/bits/stl_algobase.h:71,
-                 from /usr/include/c++/8/bits/char_traits.h:39,
-                 from /usr/include/c++/8/string:40,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-/usr/include/c++/8/bits/predefined_ops.h: In instantiation of ‘bool __gnu_cxx::__ops::_Iter_comp_iter<_Compare>::operator()(_Iterator1, _Iterator2) [with _Iterator1 = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Iterator2 = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’:
-/usr/include/c++/8/bits/stl_heap.h:222:14:   required from ‘void std::__adjust_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:342:22:   required from ‘void std::__make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:397:23:   required from ‘void std::make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’
-/usr/include/c++/8/bits/stl_queue.h:496:23:   required from ‘std::priority_queue<_Tp, _Sequence, _Compare>::priority_queue(const _Compare&, _Sequence&&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::vector<std::unique_ptr<CovidPatient> >; _Compare = ComparePatient]’
-CovidPriorityQueue.h:58:143:   required from here
-/usr/include/c++/8/bits/predefined_ops.h:143:18: error: no match for call to ‘(ComparePatient) (std::unique_ptr<CovidPatient>&, std::unique_ptr<CovidPatient>&)’
-         { return bool(_M_comp(*__it1, *__it2)); }
-                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-CovidPatient.h:55:8: note: candidate: ‘bool ComparePatient::operator()(const CovidPatient*, const CovidPatient*) const’
-   bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-        ^~~~~~~~
-CovidPatient.h:55:8: note:   no known conversion for argument 1 from ‘std::unique_ptr<CovidPatient>’ to ‘const CovidPatient*’
-In file included from /usr/include/c++/8/bits/stl_algobase.h:71,
-                 from /usr/include/c++/8/bits/char_traits.h:39,
-                 from /usr/include/c++/8/string:40,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from main.cpp:1:
-/usr/include/c++/8/bits/predefined_ops.h: In instantiation of ‘bool __gnu_cxx::__ops::_Iter_comp_iter<_Compare>::operator()(_Iterator1, _Iterator2) [with _Iterator1 = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Iterator2 = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’:
-/usr/include/c++/8/bits/stl_heap.h:222:14:   required from ‘void std::__adjust_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:342:22:   required from ‘void std::__make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:397:23:   required from ‘void std::make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’
-/usr/include/c++/8/bits/stl_queue.h:496:23:   required from ‘std::priority_queue<_Tp, _Sequence, _Compare>::priority_queue(const _Compare&, _Sequence&&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::vector<std::unique_ptr<CovidPatient> >; _Compare = ComparePatient]’
-CovidPriorityQueue.h:58:143:   required from here
-/usr/include/c++/8/bits/predefined_ops.h:143:18: error: no match for call to ‘(ComparePatient) (std::unique_ptr<CovidPatient>&, std::unique_ptr<CovidPatient>&)’
-         { return bool(_M_comp(*__it1, *__it2)); }
-                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from CovidPriorityQueue.h:21,
-                 from main.cpp:1:
-CovidPatient.h:55:8: note: candidate: ‘bool ComparePatient::operator()(const CovidPatient*, const CovidPatient*) const’
-   bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-        ^~~~~~~~
-CovidPatient.h:55:8: note:   no known conversion for argument 1 from ‘std::unique_ptr<CovidPatient>’ to ‘const CovidPatient*’
-In file included from /usr/include/c++/8/memory:64,
-                 from CovidPriorityQueue.h:23,
-                 from main.cpp:1:
-/usr/include/c++/8/bits/stl_construct.h: In instantiation of ‘void std::_Construct(_T1*, _Args&& ...) [with _T1 = std::unique_ptr<CovidPatient>; _Args = {const std::unique_ptr<CovidPatient, std::default_delete<CovidPatient> >&}]’:
-/usr/include/c++/8/bits/stl_uninitialized.h:83:18:   required from ‘static _ForwardIterator std::__uninitialized_copy<_TrivialValueTypes>::__uninit_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _ForwardIterator = std::unique_ptr<CovidPatient>*; bool _TrivialValueTypes = false]’
-/usr/include/c++/8/bits/stl_uninitialized.h:134:15:   required from ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _ForwardIterator = std::unique_ptr<CovidPatient>*]’
-/usr/include/c++/8/bits/stl_uninitialized.h:289:37:   required from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>&) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _ForwardIterator = std::unique_ptr<CovidPatient>*; _Tp = std::unique_ptr<CovidPatient>]’
-/usr/include/c++/8/bits/stl_vector.h:463:31:   required from ‘std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = std::unique_ptr<CovidPatient>; _Alloc = std::allocator<std::unique_ptr<CovidPatient> >]’
-/usr/include/c++/8/bits/stl_queue.h:435:11:   required from here
-/usr/include/c++/8/bits/stl_construct.h:75:7: error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>::unique_ptr(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = CovidPatient; _Dp = std::default_delete<CovidPatient>]’
-     { ::new(static_cast<void*>(__p)) _T1(std::forward<_Args>(__args)...); }
-       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from /usr/include/c++/8/memory:80,
-                 from CovidPriorityQueue.h:23,
-                 from main.cpp:1:
-/usr/include/c++/8/bits/unique_ptr.h:397:7: note: declared here
-       unique_ptr(const unique_ptr&) = delete;
-       ^~~~~~~~~~
-In file included from /usr/include/c++/8/bits/stl_algobase.h:71,
-                 from /usr/include/c++/8/bits/char_traits.h:39,
-                 from /usr/include/c++/8/string:40,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from main.cpp:1:
-/usr/include/c++/8/bits/predefined_ops.h: In instantiation of ‘bool __gnu_cxx::__ops::_Iter_comp_val<_Compare>::operator()(_Iterator, _Value&) [with _Iterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Value = std::unique_ptr<CovidPatient>; _Compare = ComparePatient]’:
-/usr/include/c++/8/bits/stl_heap.h:133:48:   required from ‘void std::__push_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_val<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:237:23:   required from ‘void std::__adjust_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:342:22:   required from ‘void std::__make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:397:23:   required from ‘void std::make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’
-/usr/include/c++/8/bits/stl_queue.h:496:23:   required from ‘std::priority_queue<_Tp, _Sequence, _Compare>::priority_queue(const _Compare&, _Sequence&&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::vector<std::unique_ptr<CovidPatient> >; _Compare = ComparePatient]’
-CovidPriorityQueue.h:58:143:   required from here
-/usr/include/c++/8/bits/predefined_ops.h:177:11: error: no match for call to ‘(ComparePatient) (std::unique_ptr<CovidPatient>&, std::unique_ptr<CovidPatient>&)’
-  { return bool(_M_comp(*__it, __val)); }
-           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from CovidPriorityQueue.h:21,
-                 from main.cpp:1:
-CovidPatient.h:55:8: note: candidate: ‘bool ComparePatient::operator()(const CovidPatient*, const CovidPatient*) const’
-   bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-        ^~~~~~~~
-CovidPatient.h:55:8: note:   no known conversion for argument 1 from ‘std::unique_ptr<CovidPatient>’ to ‘const CovidPatient*’
 =====================================================
 6. No memory leaks using valgrind, look for "definitely lost" 
 =====================================================
-CovidPriorityQueue.cpp: In member function ‘bool COVIDPriorityQueue::initFromFile(std::fstream&)’:
-CovidPriorityQueue.cpp:92:50: error: ‘make_unique’ is not a member of ‘std’
-     std::unique_ptr<CovidPatient> Patient = std::make_unique<CovidPatient>(strToPatient(CurrLine));
-                                                  ^~~~~~~~~~~
-CovidPriorityQueue.cpp:92:50: note: ‘std::make_unique’ is only available from C++14 onwards
-CovidPriorityQueue.cpp:92:74: error: expected primary-expression before ‘>’ token
-     std::unique_ptr<CovidPatient> Patient = std::make_unique<CovidPatient>(strToPatient(CurrLine));
-                                                                          ^
-In file included from /usr/include/c++/8/x86_64-redhat-linux/bits/c++allocator.h:33,
-                 from /usr/include/c++/8/bits/allocator.h:46,
-                 from /usr/include/c++/8/string:41,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-/usr/include/c++/8/ext/new_allocator.h: In instantiation of ‘void __gnu_cxx::new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = std::unique_ptr<CovidPatient>; _Args = {const std::unique_ptr<CovidPatient, std::default_delete<CovidPatient> >&}; _Tp = std::unique_ptr<CovidPatient>]’:
-/usr/include/c++/8/bits/alloc_traits.h:475:4:   required from ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(std::allocator_traits<std::allocator<_CharT> >::allocator_type&, _Up*, _Args&& ...) [with _Up = std::unique_ptr<CovidPatient>; _Args = {const std::unique_ptr<CovidPatient, std::default_delete<CovidPatient> >&}; _Tp = std::unique_ptr<CovidPatient>; std::allocator_traits<std::allocator<_CharT> >::allocator_type = std::allocator<std::unique_ptr<CovidPatient> >]’
-/usr/include/c++/8/bits/stl_deque.h:1557:30:   required from ‘void std::deque<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = std::unique_ptr<CovidPatient>; _Alloc = std::allocator<std::unique_ptr<CovidPatient> >; std::deque<_Tp, _Alloc>::value_type = std::unique_ptr<CovidPatient>]’
-/usr/include/c++/8/bits/stl_stack.h:226:9:   required from ‘void std::stack<_Tp, _Sequence>::push(const value_type&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::deque<std::unique_ptr<CovidPatient>, std::allocator<std::unique_ptr<CovidPatient> > >; std::stack<_Tp, _Sequence>::value_type = std::unique_ptr<CovidPatient>]’
-CovidPriorityQueue.cpp:40:41:   required from here
-/usr/include/c++/8/ext/new_allocator.h:136:4: error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>::unique_ptr(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = CovidPatient; _Dp = std::default_delete<CovidPatient>]’
-  { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
-    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from /usr/include/c++/8/memory:80,
-                 from CovidPriorityQueue.h:23,
-                 from CovidPriorityQueue.cpp:17:
-/usr/include/c++/8/bits/unique_ptr.h:397:7: note: declared here
-       unique_ptr(const unique_ptr&) = delete;
-       ^~~~~~~~~~
-In file included from /usr/include/c++/8/bits/stl_algobase.h:71,
-                 from /usr/include/c++/8/bits/char_traits.h:39,
-                 from /usr/include/c++/8/string:40,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-/usr/include/c++/8/bits/predefined_ops.h: In instantiation of ‘bool __gnu_cxx::__ops::_Iter_comp_val<_Compare>::operator()(_Iterator, _Value&) [with _Iterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Value = std::unique_ptr<CovidPatient>; _Compare = ComparePatient]’:
-/usr/include/c++/8/bits/stl_heap.h:133:48:   required from ‘void std::__push_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_val<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:207:23:   required from ‘void std::push_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’
-/usr/include/c++/8/bits/stl_queue.h:614:16:   required from ‘void std::priority_queue<_Tp, _Sequence, _Compare>::push(const value_type&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::vector<std::unique_ptr<CovidPatient> >; _Compare = ComparePatient; std::priority_queue<_Tp, _Sequence, _Compare>::value_type = std::unique_ptr<CovidPatient>]’
-CovidPriorityQueue.cpp:48:41:   required from here
-/usr/include/c++/8/bits/predefined_ops.h:177:11: error: no match for call to ‘(ComparePatient) (std::unique_ptr<CovidPatient>&, std::unique_ptr<CovidPatient>&)’
-  { return bool(_M_comp(*__it, __val)); }
-           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-CovidPatient.h:55:8: note: candidate: ‘bool ComparePatient::operator()(const CovidPatient*, const CovidPatient*) const’
-   bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-        ^~~~~~~~
-CovidPatient.h:55:8: note:   no known conversion for argument 1 from ‘std::unique_ptr<CovidPatient>’ to ‘const CovidPatient*’
-In file included from /usr/include/c++/8/bits/stl_algobase.h:71,
-                 from /usr/include/c++/8/bits/char_traits.h:39,
-                 from /usr/include/c++/8/string:40,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-/usr/include/c++/8/bits/predefined_ops.h: In instantiation of ‘bool __gnu_cxx::__ops::_Iter_comp_iter<_Compare>::operator()(_Iterator1, _Iterator2) [with _Iterator1 = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Iterator2 = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’:
-/usr/include/c++/8/bits/stl_heap.h:222:14:   required from ‘void std::__adjust_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:342:22:   required from ‘void std::__make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:397:23:   required from ‘void std::make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’
-/usr/include/c++/8/bits/stl_queue.h:496:23:   required from ‘std::priority_queue<_Tp, _Sequence, _Compare>::priority_queue(const _Compare&, _Sequence&&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::vector<std::unique_ptr<CovidPatient> >; _Compare = ComparePatient]’
-CovidPriorityQueue.h:58:143:   required from here
-/usr/include/c++/8/bits/predefined_ops.h:143:18: error: no match for call to ‘(ComparePatient) (std::unique_ptr<CovidPatient>&, std::unique_ptr<CovidPatient>&)’
-         { return bool(_M_comp(*__it1, *__it2)); }
-                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from CovidPriorityQueue.h:21,
-                 from CovidPriorityQueue.cpp:17:
-CovidPatient.h:55:8: note: candidate: ‘bool ComparePatient::operator()(const CovidPatient*, const CovidPatient*) const’
-   bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-        ^~~~~~~~
-CovidPatient.h:55:8: note:   no known conversion for argument 1 from ‘std::unique_ptr<CovidPatient>’ to ‘const CovidPatient*’
-In file included from /usr/include/c++/8/bits/stl_algobase.h:71,
-                 from /usr/include/c++/8/bits/char_traits.h:39,
-                 from /usr/include/c++/8/string:40,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from main.cpp:1:
-/usr/include/c++/8/bits/predefined_ops.h: In instantiation of ‘bool __gnu_cxx::__ops::_Iter_comp_iter<_Compare>::operator()(_Iterator1, _Iterator2) [with _Iterator1 = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Iterator2 = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’:
-/usr/include/c++/8/bits/stl_heap.h:222:14:   required from ‘void std::__adjust_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:342:22:   required from ‘void std::__make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:397:23:   required from ‘void std::make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’
-/usr/include/c++/8/bits/stl_queue.h:496:23:   required from ‘std::priority_queue<_Tp, _Sequence, _Compare>::priority_queue(const _Compare&, _Sequence&&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::vector<std::unique_ptr<CovidPatient> >; _Compare = ComparePatient]’
-CovidPriorityQueue.h:58:143:   required from here
-/usr/include/c++/8/bits/predefined_ops.h:143:18: error: no match for call to ‘(ComparePatient) (std::unique_ptr<CovidPatient>&, std::unique_ptr<CovidPatient>&)’
-         { return bool(_M_comp(*__it1, *__it2)); }
-                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from CovidPriorityQueue.h:21,
-                 from main.cpp:1:
-CovidPatient.h:55:8: note: candidate: ‘bool ComparePatient::operator()(const CovidPatient*, const CovidPatient*) const’
-   bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-        ^~~~~~~~
-CovidPatient.h:55:8: note:   no known conversion for argument 1 from ‘std::unique_ptr<CovidPatient>’ to ‘const CovidPatient*’
-In file included from /usr/include/c++/8/memory:64,
-                 from CovidPriorityQueue.h:23,
-                 from main.cpp:1:
-/usr/include/c++/8/bits/stl_construct.h: In instantiation of ‘void std::_Construct(_T1*, _Args&& ...) [with _T1 = std::unique_ptr<CovidPatient>; _Args = {const std::unique_ptr<CovidPatient, std::default_delete<CovidPatient> >&}]’:
-/usr/include/c++/8/bits/stl_uninitialized.h:83:18:   required from ‘static _ForwardIterator std::__uninitialized_copy<_TrivialValueTypes>::__uninit_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _ForwardIterator = std::unique_ptr<CovidPatient>*; bool _TrivialValueTypes = false]’
-/usr/include/c++/8/bits/stl_uninitialized.h:134:15:   required from ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _ForwardIterator = std::unique_ptr<CovidPatient>*]’
-/usr/include/c++/8/bits/stl_uninitialized.h:289:37:   required from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>&) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _ForwardIterator = std::unique_ptr<CovidPatient>*; _Tp = std::unique_ptr<CovidPatient>]’
-/usr/include/c++/8/bits/stl_vector.h:463:31:   required from ‘std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = std::unique_ptr<CovidPatient>; _Alloc = std::allocator<std::unique_ptr<CovidPatient> >]’
-/usr/include/c++/8/bits/stl_queue.h:435:11:   required from here
-/usr/include/c++/8/bits/stl_construct.h:75:7: error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>::unique_ptr(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = CovidPatient; _Dp = std::default_delete<CovidPatient>]’
-     { ::new(static_cast<void*>(__p)) _T1(std::forward<_Args>(__args)...); }
-       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from /usr/include/c++/8/memory:80,
-                 from CovidPriorityQueue.h:23,
-                 from main.cpp:1:
-/usr/include/c++/8/bits/unique_ptr.h:397:7: note: declared here
-       unique_ptr(const unique_ptr&) = delete;
-       ^~~~~~~~~~
-In file included from /usr/include/c++/8/bits/stl_algobase.h:71,
-                 from /usr/include/c++/8/bits/char_traits.h:39,
-                 from /usr/include/c++/8/string:40,
-                 from CovidPatient.h:17,
-                 from CovidPriorityQueue.h:21,
-                 from main.cpp:1:
-/usr/include/c++/8/bits/predefined_ops.h: In instantiation of ‘bool __gnu_cxx::__ops::_Iter_comp_val<_Compare>::operator()(_Iterator, _Value&) [with _Iterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Value = std::unique_ptr<CovidPatient>; _Compare = ComparePatient]’:
-/usr/include/c++/8/bits/stl_heap.h:133:48:   required from ‘void std::__push_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_val<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:237:23:   required from ‘void std::__adjust_heap(_RandomAccessIterator, _Distance, _Distance, _Tp, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Distance = long int; _Tp = std::unique_ptr<CovidPatient>; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:342:22:   required from ‘void std::__make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare&) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = __gnu_cxx::__ops::_Iter_comp_iter<ComparePatient>]’
-/usr/include/c++/8/bits/stl_heap.h:397:23:   required from ‘void std::make_heap(_RandomAccessIterator, _RandomAccessIterator, _Compare) [with _RandomAccessIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<CovidPatient>*, std::vector<std::unique_ptr<CovidPatient> > >; _Compare = ComparePatient]’
-/usr/include/c++/8/bits/stl_queue.h:496:23:   required from ‘std::priority_queue<_Tp, _Sequence, _Compare>::priority_queue(const _Compare&, _Sequence&&) [with _Tp = std::unique_ptr<CovidPatient>; _Sequence = std::vector<std::unique_ptr<CovidPatient> >; _Compare = ComparePatient]’
-CovidPriorityQueue.h:58:143:   required from here
-/usr/include/c++/8/bits/predefined_ops.h:177:11: error: no match for call to ‘(ComparePatient) (std::unique_ptr<CovidPatient>&, std::unique_ptr<CovidPatient>&)’
-  { return bool(_M_comp(*__it, __val)); }
-           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from CovidPriorityQueue.h:21,
-                 from main.cpp:1:
-CovidPatient.h:55:8: note: candidate: ‘bool ComparePatient::operator()(const CovidPatient*, const CovidPatient*) const’
-   bool operator()(const CovidPatient *lhs, const CovidPatient *rhs) const {
-        ^~~~~~~~
-CovidPatient.h:55:8: note:   no known conversion for argument 1 from ‘std::unique_ptr<CovidPatient>’ to ‘const CovidPatient*’
-cat: valgrind-output.txt: No such file or directory
+==1100691== Memcheck, a memory error detector
+==1100691== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==1100691== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==1100691== Command: ./a.out
+==1100691== Parent PID: 1100598
+==1100691== 
+==1100691== 
+==1100691== HEAP SUMMARY:
+==1100691==     in use at exit: 40 bytes in 1 blocks
+==1100691==   total heap usage: 18 allocs, 17 frees, 86,464 bytes allocated
+==1100691== 
+==1100691== 40 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==1100691==    at 0x4C38913: operator new(unsigned long) (vg_replace_malloc.c:472)
+==1100691==    by 0x401E6A: COVIDPriorityQueue::strToPatient(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (CovidPriorityQueue.cpp:141)
+==1100691==    by 0x401C0A: COVIDPriorityQueue::initFromFile(std::basic_fstream<char, std::char_traits<char> >&) (CovidPriorityQueue.cpp:100)
+==1100691==    by 0x401B71: COVIDPriorityQueue::initFromFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (CovidPriorityQueue.cpp:77)
+==1100691==    by 0x404E55: main (main.cpp:8)
+==1100691== 
+==1100691== LEAK SUMMARY:
+==1100691==    definitely lost: 40 bytes in 1 blocks
+==1100691==    indirectly lost: 0 bytes in 0 blocks
+==1100691==      possibly lost: 0 bytes in 0 blocks
+==1100691==    still reachable: 0 bytes in 0 blocks
+==1100691==         suppressed: 0 bytes in 0 blocks
+==1100691== 
+==1100691== For lists of detected and suppressed errors, rerun with: -s
+==1100691== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 =====================================================
 7. Tests have full code coverage
 =====================================================
-./create-output.sh: line 129: ./check-code-coverage.sh: Permission denied
-Sun Apr  7 22:47:27 PDT 2024
+File '/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPatient.cpp':
+Name                                             Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
+----------------------------------------------------------------------------------------------------------------------------
+operator<<(std::ostream&, CovidPatient const&)         1       0 100.00%         4       0 100.00%         0       0   0.00%
+----------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                  1       0 100.00%         4       0 100.00%         0       0   0.00%
+
+File '/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/CovidPriorityQueue.cpp':
+Name                                                                                                                      Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+COVIDPriorityQueue::~COVIDPriorityQueue()                                                                                       3       0 100.00%         8       0 100.00%         2       0 100.00%
+COVIDPriorityQueue::displayAvailable()                                                                                          7       0 100.00%        14       0 100.00%         6       1  83.33%
+COVIDPriorityQueue::initFromFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&)         4       1  75.00%         7       1  85.71%         2       1  50.00%
+COVIDPriorityQueue::initFromFile(std::basic_fstream<char, std::char_traits<char>>&)                                             7       0 100.00%        10       0 100.00%         6       1  83.33%
+COVIDPriorityQueue::strToPatient(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&)        14       2  85.71%        21       4  80.95%        10       4  60.00%
+COVIDPriorityQueue::isEligibleForVaccine(CovidPatient const*) const                                                             1       0 100.00%         3       0 100.00%         0       0   0.00%
+COVIDPriorityQueue::normalizeStr(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&)               1       0 100.00%         5       0 100.00%         0       0   0.00%
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                                                          37       3  91.89%        68       5  92.65%        26       7  73.08%
+
+File '/home/NETID/mary2003/CSS343/hw/css343_priority_queue_project/main.cpp':
+Name                                                                                                                      Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+main                                                                                                                            1       0 100.00%         8       0 100.00%         0       0   0.00%
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                                                           1       0 100.00%         8       0 100.00%         0       0   0.00%
+=====================================================
+The lines below were never executed
+=====================================================
+   26|      0|  std::string getName() const { return name; }
+   57|      0|      return false; 
+   58|      0|    }
+   81|      0|  return false;
+  137|      0|      std::cout << "Invalid condition: " << HasPreconditionIllness << std::endl;
+  138|      0|      return nullptr;
+  139|      0|    }
+  144|      0|  return nullptr;
+   28|      0|  explicit COVIDPriorityQueue(int numVaccines) : availableVaccines(numVaccines) {}
+   49|      0|    return false;
+   52|      0|  int getAvailableVaccines() const { return availableVaccines; }
+Sun Apr  7 23:42:28 PDT 2024
 =====================================================
 To create an output.txt file with all the output from this script
 Run the below command

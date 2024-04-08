@@ -24,12 +24,15 @@
 COVIDPriorityQueue::~COVIDPriorityQueue() {
   while (!vaccineQueue.empty()) {
     CovidPatient *Patient = vaccineQueue.top();
+    // std::cout << "Delete CovidPriorityQ patient: " << *Patient << std::endl;
     
     delete(Patient);
     Patient = nullptr;
     
     vaccineQueue.pop();
   }
+
+  //std::cout << "Delete CovidPriorityQ" << std::endl;
 }
 
 /**
@@ -92,13 +95,12 @@ bool COVIDPriorityQueue::initFromFile(const std::string &filename) {
  */
 bool COVIDPriorityQueue::initFromFile(std::fstream &infile) {
   std::string CurrLine;
+
   while (std::getline(infile, CurrLine)) {
-    
     CovidPatient *Patient = strToPatient(CurrLine);
     
-
     if (Patient != nullptr && isEligibleForVaccine(Patient)) {
-      vaccineQueue.push(std::move(Patient));
+      vaccineQueue.push(Patient);
     }
   }
 
@@ -136,7 +138,8 @@ CovidPatient *COVIDPriorityQueue::strToPatient(const std::string &patientInfo) {
       return nullptr;
     }
 
-    return new CovidPatient(Name, Age, HasPrecondition);
+    CovidPatient *Patient = new CovidPatient(Name, Age, HasPrecondition);
+    return Patient;
   }
   return nullptr;
 }

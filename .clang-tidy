@@ -11,6 +11,8 @@
 
 Checks: >-
   *,
+  -modernize-use-auto,
+  -clang-analyzer-cplusplus.NewDeleteLeaks,
   -hicpp-use-auto,
   -readability-identifier-naming,
   -clang-diagnostic-error,

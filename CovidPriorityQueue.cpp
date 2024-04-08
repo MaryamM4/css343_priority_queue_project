@@ -23,6 +23,11 @@
 
 COVIDPriorityQueue::~COVIDPriorityQueue() {
   while (!vaccineQueue.empty()) {
+    CovidPatient *Patient = vaccineQueue.top();
+    
+    delete(Patient);
+    Patient = nullptr;
+    
     vaccineQueue.pop();
   }
 }
@@ -32,7 +37,7 @@ COVIDPriorityQueue::~COVIDPriorityQueue() {
  * but only up to the number of avaiable vaccines.
  */
 void COVIDPriorityQueue::displayAvailable() {
-  std::stack<std::unique_ptr<CovidPatient>> PatientStack;
+  std::stack<CovidPatient *> PatientStack;
 
   int PatientNum = 0;
   while (PatientNum < availableVaccines && !vaccineQueue.empty()) {
@@ -89,7 +94,7 @@ bool COVIDPriorityQueue::initFromFile(std::fstream &infile) {
   std::string CurrLine;
   while (std::getline(infile, CurrLine)) {
     
-    std::unique_ptr<CovidPatient> Patient = std::make_unique<CovidPatient>(strToPatient(CurrLine));
+    CovidPatient *Patient = strToPatient(CurrLine);
     
 
     if (Patient != nullptr && isEligibleForVaccine(Patient)) {
@@ -132,8 +137,6 @@ CovidPatient *COVIDPriorityQueue::strToPatient(const std::string &patientInfo) {
     }
 
     return new CovidPatient(Name, Age, HasPrecondition);
-    //CovidPatient *Patient = new CovidPatient(Name, Age, HasPrecondition);
-    //return Patient;
   }
   return nullptr;
 }
@@ -145,7 +148,7 @@ CovidPatient *COVIDPriorityQueue::strToPatient(const std::string &patientInfo) {
  *
  * @return true if the patient is eligible, false otherwise.
  */
-bool COVIDPriorityQueue::isEligibleForVaccine(const std::unique_ptr<CovidPatient>& patient) const {
+bool COVIDPriorityQueue::isEligibleForVaccine(const CovidPatient *patient) const {
   return (patient->getAge() >= MinEligibleAge);
 }
 

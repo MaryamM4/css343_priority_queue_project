@@ -21,10 +21,12 @@
 #include <sstream>
 #include <stack>
 
-COVIDPriorityQueue::COVIDPriorityQueue() {}
-
 COVIDPriorityQueue::~COVIDPriorityQueue() {
   while (!vaccineQueue.empty()) {
+    CovidPatient *Patient = vaccineQueue.top();
+    delete(Patient);
+    Patient = nullptr
+    
     vaccineQueue.pop();
   }
 }
@@ -34,21 +36,21 @@ COVIDPriorityQueue::~COVIDPriorityQueue() {
  * but only up to the number of avaiable vaccines.
  */
 void COVIDPriorityQueue::displayAvailable() {
-  std::stack<CovidPatient *> patientStack;
+  std::stack<CovidPatient *> PatientStack;
 
-  int i = 0;
-  while (i < availableVaccines && !vaccineQueue.empty()) {
-    i++;
-    patientStack.push(vaccineQueue.top());
-    std::cout << i << ": " << *(vaccineQueue.top()) << std::endl;
+  int PatientNum = 0;
+  while (PatientNum < availableVaccines && !vaccineQueue.empty()) {
+    PatientNum++;
+    PatientStack.push(vaccineQueue.top());
+    std::cout << PatientNum << ": " << *(vaccineQueue.top()) << std::endl;
 
     vaccineQueue.pop();
   }
 
   // Return stack contents to queue
-  while (!patientStack.empty()) {
-    vaccineQueue.push(patientStack.top());
-    patientStack.pop();
+  while (!PatientStack.empty()) {
+    vaccineQueue.push(PatientStack.top());
+    PatientStack.pop();
   }
 }
 
@@ -64,16 +66,15 @@ void COVIDPriorityQueue::displayAvailable() {
  *         Also return false if no patients were added to the queue.
  *         Otherwise return true.
  */
-bool COVIDPriorityQueue::initFromFile(std::string filename) {
-  std::fstream file;
-  file.open(filename);
+bool COVIDPriorityQueue::initFromFile(const std::string &filename) {
+  std::fstream File(filename);
 
-  if (file.is_open()) {
-    return initFromFile(file);
+  if (File.is_open()) {
+    return initFromFile(File);
+  } 
 
-  } else {
-    return false;
-  }
+  // Failed to open file. 
+  return false;
 }
 
 /**
@@ -89,17 +90,18 @@ bool COVIDPriorityQueue::initFromFile(std::string filename) {
  *         Otherwise return true.
  */
 bool COVIDPriorityQueue::initFromFile(std::fstream &infile) {
-  std::string currLine;
-  while (std::getline(infile, currLine)) {
+  std::string CurrLine;
+  while (std::getline(infile, CurrLine)) {
+    
+    CovidPatient *Patient = strToPatient(CurrLine);
+    
 
-    CovidPatient *patient = strToPatient(currLine);
-
-    if (patient != nullptr && isEligibleForVaccine(patient)) {
-      vaccineQueue.push(patient);
+    if (Patient != nullptr && isEligibleForVaccine(Patient)) {
+      vaccineQueue.push(std::move(Patient));
     }
   }
 
-  return (vaccineQueue.size() > 0);
+  return (!vaccineQueue.empty());
 }
 
 /**
@@ -108,33 +110,32 @@ bool COVIDPriorityQueue::initFromFile(std::fstream &infile) {
  * @returns Pointer to patient with the given data.
  *          On invalid input, returns nullptr.
  */
-CovidPatient *COVIDPriorityQueue::strToPatient(std::string patientInfo) {
-  std::string name;
-  std::string ageStr;
-  std::string hasPreconditionIllness;
+CovidPatient *COVIDPriorityQueue::strToPatient(const std::string &patientInfo) {
+  std::string Name;
+  std::string AgeStr;
+  std::string HasPreconditionIllness;
 
-  std::istringstream iss(patientInfo);
+  std::istringstream Iss(patientInfo);
 
-  if (std::getline(iss, name, ',') && std::getline(iss, ageStr, ',') &&
-      std::getline(iss, hasPreconditionIllness)) {
+  if (std::getline(Iss, Name, ',') && std::getline(Iss, AgeStr, ',') &&
+      std::getline(Iss, HasPreconditionIllness)) {
 
-    int age = std::stoi(ageStr);
-    bool hasPrecondition = false;
+    const int Age = std::stoi(AgeStr);
+    int HasPrecondition = 0;
 
     // Remove whitespaces and convert to lowercase
-    normalizeStr(hasPreconditionIllness);
+    normalizeStr(HasPreconditionIllness);
 
-    if (hasPreconditionIllness == "yes") {
-      hasPrecondition = true;
+    if (HasPreconditionIllness == "yes") {
+      HasPrecondition = 1;
 
-    } else if (hasPreconditionIllness != "no") {
+    } else if (HasPreconditionIllness != "no") {
       // If the condition field is neither "yes" or "no", the input is invalid.
-      std::cout << "Invalid condition: " << hasPreconditionIllness << std::endl;
+      std::cout << "Invalid condition: " << HasPreconditionIllness << std::endl;
       return nullptr;
     }
 
-    CovidPatient *patient = new CovidPatient(name, age, hasPrecondition);
-    return patient;
+    return new CovidPatient(Name, Age, HasPrecondition);
   }
   return nullptr;
 }
@@ -146,8 +147,8 @@ CovidPatient *COVIDPriorityQueue::strToPatient(std::string patientInfo) {
  *
  * @return true if the patient is eligible, false otherwise.
  */
-bool COVIDPriorityQueue::isEligibleForVaccine(CovidPatient *patient) {
-  return (patient->age >= 5);
+bool COVIDPriorityQueue::isEligibleForVaccine(const CovidPatient *patient) const {
+  return (patient->getAge() >= MinEligibleAge);
 }
 
 /**
@@ -160,8 +161,8 @@ bool COVIDPriorityQueue::isEligibleForVaccine(CovidPatient *patient) {
  *   whole-string-uppercase-lowercase-using-stl-c/
  */
 void COVIDPriorityQueue::normalizeStr(std::string &str) {
-  auto newEnd = remove_if(str.begin(), str.end(), isspace);
-  str.erase(newEnd, str.end());
+  auto NewEnd = remove_if(str.begin(), str.end(), isspace);
+  str.erase(NewEnd, str.end());
 
   transform(str.begin(), str.end(), str.begin(), ::tolower);
 }

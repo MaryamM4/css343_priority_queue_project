@@ -20,7 +20,6 @@
 
 #include "CovidPatient.h"
 #include <fstream> // For reading files
-#include <memory> // For unique_ptr & make_unique
 #include <queue>
 
 class COVIDPriorityQueue {
@@ -38,7 +37,7 @@ public:
   bool initFromFile(std::fstream &infile);
 
   // Returns False if under 5.
-  bool isEligibleForVaccine(const std::unique_ptr<CovidPatient>& patient) const;
+  bool isEligibleForVaccine(const CovidPatient *patient) const;
 
   void displayAvailable(); // RENAME
 
@@ -55,7 +54,9 @@ public:
 private:
   const int MinEligibleAge = 5;
 
-  std::priority_queue<std::unique_ptr<CovidPatient>, std::vector<std::unique_ptr<CovidPatient>>, ComparePatient> vaccineQueue{ComparePatient()};
+std::priority_queue<CovidPatient *, std::vector<CovidPatient *>,
+                ComparePatient>
+vaccineQueue;
 
   int availableVaccines; // Number of available vaccines.
 
